@@ -14,7 +14,6 @@ namespace BusinessLaag.klassen
         public string Adres { get;private set; }
         public string Email { get;private set; }
         public string RijksregisterNummer { get;private set; }
-
         public DateTime GeboorteDatum { get;private set; }
         #endregion
 
