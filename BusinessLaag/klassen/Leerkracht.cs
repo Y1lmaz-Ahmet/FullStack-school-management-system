@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLaag.klassen
 {
-    internal class Leerkracht : Personeel
+    public class Leerkracht : Personeel
     {
         #region Properties
-        List<string> Vakken = new List<string>();
+        public  List<string> Vakken = new List<string>();
         #endregion
         #region Constructor
         public Leerkracht(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,List<string> vakken)
