@@ -14,16 +14,19 @@ namespace BusinessLaag.klassen
         public string Adres { get;private set; }
         public string Email { get;private set; }
         public string RijksregisterNummer { get;private set; }
+
+        public DateTime GeboorteDatum { get;private set; }
         #endregion
 
         #region Constructor
-        public Mens(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer)
+        public Mens(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum)
         {
             Voornaam = voornaam;
             FamilieNaam = familieNaam;
             Adres = adres;
             Email = email;
             RijksregisterNummer = rijksregisterNummer;
+            GeboorteDatum = geboorteDatum;
         }
         #endregion
 

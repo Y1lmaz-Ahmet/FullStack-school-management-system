@@ -13,8 +13,8 @@ namespace BusinessLaag.klassen
         #endregion
 
         #region Constructor
-        public Personeel(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,string functie) 
-            : base(voornaam, familieNaam, adres, email, rijksregisterNummer)
+        public Personeel(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,string functie) 
+            : base(voornaam, familieNaam, adres, email, rijksregisterNummer,geboorteDatum)
         {
             Functie = functie;
         }

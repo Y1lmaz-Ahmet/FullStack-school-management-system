@@ -15,8 +15,8 @@ namespace BusinessLaag.klassen
         #endregion
 
         #region Constructor
-        public Leerling(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,int leerJaar,string klasLokaal)
-            : base(voornaam, familieNaam, adres, email, rijksregisterNummer,"Leerling")
+        public Leerling(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,int leerJaar,string klasLokaal)
+            : base(voornaam, familieNaam, adres, email, rijksregisterNummer,geboorteDatum,"Leerling")
         {
             LeerJaar = leerJaar;
             KlasLokaal = klasLokaal;
