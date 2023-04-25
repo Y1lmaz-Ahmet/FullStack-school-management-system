@@ -12,7 +12,7 @@ namespace BusinessLaag.klassen
         List<string> Vakken = new List<string>();
         #endregion
         #region Constructor
-        public Leerkracht(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,, List<string> vakken)
+        public Leerkracht(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,List<string> vakken)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer, "Leerkracht")
         {
             Vakken = vakken;
