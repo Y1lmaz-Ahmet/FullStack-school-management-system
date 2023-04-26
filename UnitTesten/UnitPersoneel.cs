@@ -3,7 +3,7 @@ using BusinessLaag.klassen;
 
 namespace UnitTesten
 {
-    public class UnitTest1
+    public class UnitPersoneel
     {
         [Fact]
         public void Test_ctr_Valid_Personeel()
