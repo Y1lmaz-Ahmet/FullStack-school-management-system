@@ -1,4 +1,5 @@
 ﻿using BusinessLaag.Enums;
+using BusinessLaag.exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace BusinessLaag.klassen
             DateTime geboorteDatum,WerknemerType werknemerType)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum,"Administratief medewerker")
         {
-
+            if (!Enum.IsDefined(typeof(WerknemerType), werknemerType)) throw new AdministratiefMedewerkerException("WerknemerType moet gekozen worden.");
             WerknemerType = werknemerType;
         }
         #endregion

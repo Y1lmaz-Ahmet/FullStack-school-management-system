@@ -42,9 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WerknemerType.cs" />
+    <Compile Include="exceptions\AdministratiefMedewerkerException.cs" />
     <Compile Include="exceptions\LeerkrachtException.cs" />
     <Compile Include="exceptions\LeerlingException.cs" />
     <Compile Include="exceptions\MensException.cs" />
+    <Compile Include="exceptions\PersoneelException.cs" />
     <Compile Include="klassen\AdministratiefMedewerker.cs" />
     <Compile Include="klassen\Leerkracht.cs" />
     <Compile Include="klassen\Leerling.cs" />

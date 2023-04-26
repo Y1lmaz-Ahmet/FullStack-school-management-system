@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLaag.Enums;
+using BusinessLaag.exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,7 @@ namespace BusinessLaag.klassen
         public Personeel(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,string functie) 
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer,geboorteDatum)
         {
+            if (string.IsNullOrWhiteSpace(functie)) throw new PersoneelException("functie moet ingevuld worden.");
             Functie = functie;
         }
         #endregion
