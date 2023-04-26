@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\WerknemerType.cs" />
+    <Compile Include="klassen\AdministratiefMedewerker.cs" />
     <Compile Include="klassen\Leerkracht.cs" />
     <Compile Include="klassen\Leerling.cs" />
     <Compile Include="klassen\Mens.cs" />

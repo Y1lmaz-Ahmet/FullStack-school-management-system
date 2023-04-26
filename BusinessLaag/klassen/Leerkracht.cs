@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLaag.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,14 @@ namespace BusinessLaag.klassen
     {
         #region Properties
         public  List<string> Vakken = new List<string>();
+       public WerknemerType WerknemerType { get; private set; }
         #endregion
         #region Constructor
-        public Leerkracht(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,List<string> vakken)
+        public Leerkracht(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,List<string> vakken,WerknemerType werknemerType)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum,"Leerkracht")
         {
             Vakken = vakken;
+            WerknemerType = werknemerType;
         }
         #endregion
     }
