@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLaag.exceptions
 {
-    internal class PersoneelException : Exception
+    public class PersoneelException : Exception
     {
        
 

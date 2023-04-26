@@ -34,12 +34,12 @@ namespace BusinessLaag.klassen
                 if (string.IsNullOrWhiteSpace(rijksregisterNummer) || rijksregisterNummer.Length != 11)
                  throw new MensException("Een rijksregisternummer bestaat uit 11 waarden en mag niet leeg zijn.");
                 RijksregisterNummer = rijksregisterNummer;
-                if (geboorteDatum == null) throw new MensException("GeboorteDatum moet ingevuld worden. yyyy-mm-dd");   
+                if (geboorteDatum == null || geboorteDatum == DateTime.MinValue || geboorteDatum == DateTime.MaxValue) throw new MensException("GeboorteDatum moet ingevuld worden. yyyy-mm-dd");   
                 GeboorteDatum = geboorteDatum;
             }
             catch (Exception ex)
             {
-                throw new MensException("Er is een fout opgetreden bij het aanmaken van een mens.", ex);
+                throw ex;
             }
         }
         #endregion
