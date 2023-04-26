@@ -1,32 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BusinessLaag.klassen.Leerkracht">
-    <Position X="1.75" Y="5.75" Width="1.5" />
+    <Position X="3" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAAAA=</HashCode>
       <FileName>klassen\Leerkracht.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BusinessLaag.klassen.Leerling">
-    <Position X="6.5" Y="5.75" Width="1.5" />
+    <Position X="7.25" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>klassen\Leerling.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BusinessLaag.klassen.Mens">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAgACAAAAAEAAAAAAAAAAgAQAAAAAgAAAAAAAA=</HashCode>
       <FileName>klassen\Mens.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BusinessLaag.klassen.Personeel">
-    <Position X="4" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>klassen\Personeel.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="BusinessLaag.klassen.AdministratiefMedewerker">
+    <Position X="5.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>klassen\AdministratiefMedewerker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BusinessLaag.Enums.WerknemerType">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\WerknemerType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
