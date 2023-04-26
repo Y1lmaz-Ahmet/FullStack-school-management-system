@@ -21,19 +21,26 @@ namespace BusinessLaag.klassen
         #region Constructor
         public Mens(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum)
         {
-            if (string.IsNullOrWhiteSpace(voornaam)) throw new MensException("Naam mag niet leeg zijn.");
-            Voornaam = voornaam;
-            if (string.IsNullOrWhiteSpace(familieNaam)) throw new MensException("Familienaam mag niet leeg zijn.");
-            FamilieNaam = familieNaam;
-            if (string.IsNullOrWhiteSpace(adres)) throw new MensException("Adres mag niet leeg zijn.");
-            Adres = adres;
-            if (string.IsNullOrWhiteSpace(email)) throw new MensException("Email mag niet leeg zijn.");
-            Email = email;
-            if (string.IsNullOrWhiteSpace(rijksregisterNummer) || rijksregisterNummer.Length != 11)
-             throw new MensException("Een rijksregisternummer bestaat uit 11 waarden en mag niet leeg zijn.");
-            RijksregisterNummer = rijksregisterNummer;
-            if (geboorteDatum == null) throw new MensException("GeboorteDatum moet ingevuld worden. yyyy-mm-dd");   
-            GeboorteDatum = geboorteDatum;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(voornaam)) throw new MensException("Naam mag niet leeg zijn.");
+                Voornaam = voornaam;
+                if (string.IsNullOrWhiteSpace(familieNaam)) throw new MensException("Familienaam mag niet leeg zijn.");
+                FamilieNaam = familieNaam;
+                if (string.IsNullOrWhiteSpace(adres)) throw new MensException("Adres mag niet leeg zijn.");
+                Adres = adres;
+                if (string.IsNullOrWhiteSpace(email)) throw new MensException("Email mag niet leeg zijn.");
+                Email = email;
+                if (string.IsNullOrWhiteSpace(rijksregisterNummer) || rijksregisterNummer.Length != 11)
+                 throw new MensException("Een rijksregisternummer bestaat uit 11 waarden en mag niet leeg zijn.");
+                RijksregisterNummer = rijksregisterNummer;
+                if (geboorteDatum == null) throw new MensException("GeboorteDatum moet ingevuld worden. yyyy-mm-dd");   
+                GeboorteDatum = geboorteDatum;
+            }
+            catch (Exception ex)
+            {
+                throw new MensException("Er is een fout opgetreden bij het aanmaken van een mens.", ex);
+            }
         }
         #endregion
 

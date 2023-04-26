@@ -19,8 +19,16 @@ namespace BusinessLaag.klassen
             DateTime geboorteDatum,WerknemerType werknemerType)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum,"Administratief medewerker")
         {
-            if (!Enum.IsDefined(typeof(WerknemerType), werknemerType)) throw new AdministratiefMedewerkerException("WerknemerType moet gekozen worden.");
-            WerknemerType = werknemerType;
+            try
+            {
+                if (!Enum.IsDefined(typeof(WerknemerType), werknemerType)) throw new AdministratiefMedewerkerException("WerknemerType moet gekozen worden.");
+                WerknemerType = werknemerType;
+            }
+            catch(Exception ex)
+            {
+                throw new AdministratiefMedewerkerException("Er is een fout opgetreden bij het aanmaken van een Administratief medewerker.", ex);
+            }
+            
         }
         #endregion
 

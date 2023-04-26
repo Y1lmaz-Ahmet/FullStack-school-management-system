@@ -19,10 +19,18 @@ namespace BusinessLaag.klassen
         public Leerling(string voornaam, string familieNaam, string adres, string email, string rijksregisterNummer,DateTime geboorteDatum,int leerJaar,string klasLokaal)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer,geboorteDatum,"Leerling")
         {
-            if (leerJaar <= 0) throw new LeerlingException("Leerjaar kan niet 0 zijn.");
-            LeerJaar = leerJaar;
-            if (string.IsNullOrWhiteSpace(klasLokaal)) throw new LeerlingException("Klaslokaal mag niet leeg zijn.");
-            KlasLokaal = klasLokaal;
+            try
+            {
+                if (leerJaar <= 0) throw new LeerlingException("Leerjaar kan niet 0 zijn.");
+                LeerJaar = leerJaar;
+                if (string.IsNullOrWhiteSpace(klasLokaal)) throw new LeerlingException("Klaslokaal mag niet leeg zijn.");
+                KlasLokaal = klasLokaal;
+            }
+            catch(Exception ex)
+            {
+                throw new LeerlingException("Er is een fout opgetreden bij het aanmaken van een Leerling.", ex);
+            }
+            
         }
         #endregion
 
