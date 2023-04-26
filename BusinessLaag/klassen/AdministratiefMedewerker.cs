@@ -18,6 +18,7 @@ namespace BusinessLaag.klassen
             DateTime geboorteDatum,WerknemerType werknemerType)
             : base(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum,"Administratief medewerker")
         {
+
             WerknemerType = werknemerType;
         }
         #endregion
