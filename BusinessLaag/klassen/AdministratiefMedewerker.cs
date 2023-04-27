@@ -12,6 +12,7 @@ namespace BusinessLaag.klassen
     {
         #region Properties
         public WerknemerType  WerknemerType { get;private set; }
+        Dictionary<string,Leerling> leerlingen = new Dictionary<string,Leerling>();
         #endregion
 
         #region Constructor
@@ -33,7 +34,39 @@ namespace BusinessLaag.klassen
         #endregion
 
         #region Methods
+        public void VoegStudentToe(Leerling leerling)
+        {
+            if (leerling == null) throw new AdministratiefMedewerkerException("er kon geen leerling gevonden worden.");
+            if(leerlingen.ContainsKey(leerling.RijksregisterNummer))
+            {
+                throw new AdministratiefMedewerkerException("sorry,deze student zit al in onze databank.");
+            }else
+            {
+                leerlingen.Add(leerling.RijksregisterNummer,leerling);
+            }
+            
+        }
+        public void VerwijderStudent(string rijksregisterNummer)
+        {
+            if (rijksregisterNummer == null) throw new AdministratiefMedewerkerException("[VerwijderStudent]:rijksregisterNummer is leeg of fout.");
+            leerlingen.Remove(rijksregisterNummer);
+        }
+        public Leerling ZoekLeerlingOpRijksregisterNummer(string rijksregisterNummer)
+        {
+            if (rijksregisterNummer == null) throw new AdministratiefMedewerkerException("rijksregisternummer is fout.");
+            if (leerlingen.ContainsKey(rijksregisterNummer)) return leerlingen[rijksregisterNummer];
+            return null;
+           
+        }
+        public Leerling updateLeerling(string rijksregisterNummer,Leerling leerling)
+        {
+            ZoekLeerlingOpRijksregisterNummer(rijksregisterNummer);
 
+        }
+        public List<Leerling> haalLeerlingen()
+        {
+            return new List<Leerling>(leerlingen.Values);
+        }
         #endregion
     }
 }

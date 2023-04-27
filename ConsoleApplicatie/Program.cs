@@ -18,7 +18,7 @@ namespace ConsoleApplicatie
             List<string> Vakken = new List<string>() { "Wiskunde", "Nederlands", "Engels", "Aardrijkskunde", "Lichamelijke Opvoeding" };
             
             // Maak een leerling aan
-            Leerling leerling = new Leerling("Jan", "Janssen", "Steenweg 1", "jan.janssen@test.be", "01010100101", new DateTime(1999, 12, 07), 1, "1A");
+            Leerling leerling = new Leerling("Jan", "Janssen", "Steenweg 1", "jan.janssen@test.be", "12345678923", new DateTime(1999, 12, 07), 1, "1A");
 
             Console.WriteLine($"{leerling.Functie}: {leerling.Voornaam} {leerling.FamilieNaam}");
             Console.WriteLine($"Adres: {leerling.Adres}");
@@ -50,6 +50,26 @@ namespace ConsoleApplicatie
             Console.WriteLine($"Geboortedatum: {admin.GeboorteDatum.ToString("dd/MM/yyyy")}");
             Console.WriteLine($"Werknemer type: {admin.WerknemerType}");
             Console.WriteLine(line);
+
+            //admin.VoegStudentToe(leerling);
+            Leerling leerling1 = new Leerling("Emma", "De Boer", "Dorpstraat 1", "emma.deboer@test.be", "12345678902", new DateTime(2005, 2, 15),1,"A");
+            Leerling leerling2 = new Leerling("Finn", "Janssens", "Dorpsstraat 2", "finn.janssens@test.be", "12345678903", new DateTime(2006, 3, 20), 2, "B");
+            admin.VoegStudentToe(leerling1);
+            admin.VoegStudentToe(leerling2);
+            foreach (Leerling l in admin.haalLeerlingen())
+            {
+                Console.WriteLine("----LEERLING-----");
+                Console.WriteLine($"{l.Functie}: {l.Voornaam} {l.FamilieNaam}");
+                Console.WriteLine($"Adres: {l.Adres}");
+                Console.WriteLine($"Email: {l.Email}");
+                Console.WriteLine($"Rijksregisternummer: {l.RijksregisterNummer}");
+                Console.WriteLine($"Geboortedatum: {l.GeboorteDatum.ToString("dd/MM/yyyy")}");
+                Console.WriteLine($"leerjaar: {l.LeerJaar}");
+                Console.WriteLine($"klas: {l.KlasLokaal}");
+                Console.WriteLine("----LEERLING-----");
+            }
+            Console.WriteLine("zoekopnummer");
+            Console.WriteLine( admin.ZoekLeerlingOpRijksregisterNummer("12345678903"));
 
             //Zodat de console niet sluit.
             Console.ReadLine();
