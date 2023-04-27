@@ -71,6 +71,23 @@ namespace ConsoleApplicatie
             Console.WriteLine("zoekopnummer");
             Console.WriteLine( admin.ZoekLeerlingOpRijksregisterNummer("12345678903"));
 
+            //testen voor updaten leerling:
+            Leerling thomas = new Leerling("Thomas", "Van Broeken", "Dorpstraat 1", "thomas.van.broeken@test.be", "15975385264", new DateTime(2005, 2, 15), 1, "A");
+            admin.VoegStudentToe(thomas);
+
+            // toon de leerling voor de update
+            Console.WriteLine("Voor de update:");
+            Leerling oudeLeerling = admin.ZoekLeerlingOpRijksregisterNummer("15975385264");
+            Console.WriteLine($"Naam: {oudeLeerling.Voornaam} {oudeLeerling.FamilieNaam}, Adres: {oudeLeerling.Adres}");
+
+            // update de leerling
+            Leerling nieuweLeerling = new Leerling("Thomas", "Van den Broeck", "Kerkstraat 10", "thomas.van.broeck@test.be", "15975385264", new DateTime(2005, 2, 15), 1, "A");
+            admin.UpdateLeerling("15975385264", nieuweLeerling);
+
+            // toon de leerling na de update
+            Console.WriteLine("Na de update:");
+            Leerling geupdateteLeerling = admin.ZoekLeerlingOpRijksregisterNummer("15975385264");
+            Console.WriteLine($"Naam: {geupdateteLeerling.Voornaam} {geupdateteLeerling.FamilieNaam}, Adres: {geupdateteLeerling.Adres}");
             //Zodat de console niet sluit.
             Console.ReadLine();
         }
