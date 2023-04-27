@@ -31,6 +31,7 @@ namespace UnitTesten
             Assert.Equal(geboorteDatum,leerling.GeboorteDatum);
             Assert.Equal(leerljaar, leerling.LeerJaar);
             Assert.Equal(klasLokaal, leerling.KlasLokaal);
+            Assert.IsType<Leerling>(leerling);
         }
         [Theory]
         [NullOrWhitespaceData]

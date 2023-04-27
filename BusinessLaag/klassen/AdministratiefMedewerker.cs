@@ -26,7 +26,7 @@ namespace BusinessLaag.klassen
             }
             catch(Exception ex)
             {
-                throw new AdministratiefMedewerkerException("Er is een fout opgetreden bij het aanmaken van een Administratief medewerker.", ex);
+                throw ex;
             }
             
         }
