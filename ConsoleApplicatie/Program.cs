@@ -89,6 +89,20 @@ namespace ConsoleApplicatie
             Leerling geupdateteLeerling = admin.ZoekLeerlingOpRijksregisterNummer("15975385264");
             Console.WriteLine($"Naam: {geupdateteLeerling.Voornaam} {geupdateteLeerling.FamilieNaam}, Adres: {geupdateteLeerling.Adres}");
             //Zodat de console niet sluit.
+            admin.VerwijderStudent("15975385264");
+            admin.VoegStudentToe(nieuweLeerling);
+            foreach (Leerling l in admin.haalLeerlingen())
+            {
+                Console.WriteLine("----LEERLING-----");
+                Console.WriteLine($"{l.Functie}: {l.Voornaam} {l.FamilieNaam}");
+                Console.WriteLine($"Adres: {l.Adres}");
+                Console.WriteLine($"Email: {l.Email}");
+                Console.WriteLine($"Rijksregisternummer: {l.RijksregisterNummer}");
+                Console.WriteLine($"Geboortedatum: {l.GeboorteDatum.ToString("dd/MM/yyyy")}");
+                Console.WriteLine($"leerjaar: {l.LeerJaar}");
+                Console.WriteLine($"klas: {l.KlasLokaal}");
+                Console.WriteLine("----LEERLING-----");
+            }
             Console.ReadLine();
         }
     }

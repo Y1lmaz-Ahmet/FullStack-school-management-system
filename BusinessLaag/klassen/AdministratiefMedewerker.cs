@@ -66,6 +66,7 @@ namespace BusinessLaag.klassen
             }else
             {
                 leerlingen[rijksregisterNummer] = leerling;
+                
             }
 
         }
