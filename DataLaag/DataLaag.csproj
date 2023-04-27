@@ -43,5 +43,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQL\AdministratiefMedewerkerSQL.sql" />
+    <Content Include="SQL\LeerkrachtSQL.sql" />
+    <Content Include="SQL\LeerlingSQL.sql" />
+    <Content Include="SQL\Mens.sql" />
+    <Content Include="SQL\PersoneelSQL.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
