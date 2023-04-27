@@ -28,7 +28,7 @@ namespace BusinessLaag.klassen
             }
             catch(Exception ex)
             {
-                throw new LeerlingException("Er is een fout opgetreden bij het aanmaken van een Leerling.", ex);
+                throw ex;
             }
             
         }

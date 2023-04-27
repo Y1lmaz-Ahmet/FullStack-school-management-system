@@ -32,7 +32,9 @@ namespace BusinessLaag.klassen
                 if (string.IsNullOrWhiteSpace(email)) throw new MensException("Email mag niet leeg zijn.");
                 Email = email;
                 if (string.IsNullOrWhiteSpace(rijksregisterNummer) || rijksregisterNummer.Length != 11)
-                 throw new MensException("Een rijksregisternummer bestaat uit 11 waarden en mag niet leeg zijn.");
+                {
+                    throw new MensException("Een rijksregisternummer bestaat uit 11 tekens en mag niet leeg zijn.");
+                }
                 RijksregisterNummer = rijksregisterNummer;
                 if (geboorteDatum == null || geboorteDatum == DateTime.MinValue || geboorteDatum == DateTime.MaxValue) throw new MensException("GeboorteDatum moet ingevuld worden. yyyy-mm-dd");   
                 GeboorteDatum = geboorteDatum;
