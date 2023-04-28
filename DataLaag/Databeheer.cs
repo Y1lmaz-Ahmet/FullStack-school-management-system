@@ -13,7 +13,7 @@ namespace DataLaag
 {
     public class Databeheer
     {
-        private string connectionString;
+        private string connectionString = "Data Source=DESKTOP-698J12G;Initial Catalog=schoolDatabank;Integrated Security=True";
 
         public Databeheer(string connectionString)
         {
@@ -24,10 +24,44 @@ namespace DataLaag
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
-
+        
         public List<Leerling> haalLeerlingen()
         {
-            throw new NotImplementedException();
+            SqlConnection connection = GetConnection();
+            List<Leerling> leerlingen = new List<Leerling>();
+            string query = "select * from dbo.LeerlingSql";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
+                        string familienaam = reader.GetString(reader.GetOrdinal("FamilieNaam"));
+                        string adres = reader.GetString(reader.GetOrdinal("Adres"));
+                        string email = reader.GetString(reader.GetOrdinal("Email"));
+                        string rijksregisterNummer = reader.GetString(reader.GetOrdinal("RijksregisterNummer"));
+                        DateTime geboorteDatum = reader.GetDateTime(reader.GetOrdinal("GeboorteDatum"));
+                        int leerJaar = reader.GetInt32(reader.GetOrdinal("LeerJaar"));
+                        string klasLokaal = reader.GetString(reader.GetOrdinal("KlasLokaal"));
+                        Leerling leerling = new Leerling(voornaam,familienaam,adres,email,rijksregisterNummer,geboorteDatum,leerJaar,klasLokaal);
+                        leerlingen.Add(leerling);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return leerlingen;
         }
 
         public void UpdateLeerling(string rijksregisterNummer, Leerling leerling)
@@ -56,6 +90,10 @@ namespace DataLaag
                     if(rowsAffected == 0)
                     {
                         throw new AdministratiefMedewerkerException("Er werd geen rij geüpdatet voor het gegeven rijksregisternummer.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("er zijn {0} aantal velden aangepast",rowsAffected);
                     }
 
                 }catch(Exception ex)
@@ -135,7 +173,34 @@ namespace DataLaag
 
         public Leerling ZoekLeerlingOpRijksregisterNummer(string rijksregisterNummer)
         {
-            throw new NotImplementedException();
+            using(SqlConnection connection = GetConnection())
+            {
+                string query = "select * from dbo.LeerlingSql where RijksregisterNummer=@RijksregisterNummer";
+                using(SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@RijksregisterNummer", rijksregisterNummer);
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        string voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
+                        string familienaam = reader.GetString(reader.GetOrdinal("FamilieNaam"));
+                        string adres = reader.GetString(reader.GetOrdinal("Adres"));
+                        string email = reader.GetString(reader.GetOrdinal("Email"));
+                        
+                        DateTime geboorteDatum = reader.GetDateTime(reader.GetOrdinal("GeboorteDatum"));
+                        int leerJaar = reader.GetInt32(reader.GetOrdinal("LeerJaar"));
+                        string klasLokaal = reader.GetString(reader.GetOrdinal("KlasLokaal"));
+                        Leerling leerling = new Leerling(voornaam, familienaam, adres, email, rijksregisterNummer, geboorteDatum, leerJaar, klasLokaal);
+                        return leerling;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
         }
 
        

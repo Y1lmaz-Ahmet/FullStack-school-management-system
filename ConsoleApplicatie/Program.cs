@@ -17,7 +17,7 @@ namespace ConsoleApplicatie
             //string line = new string('*', consoleWidth);
             //Console.WriteLine(line);
             //List<string> Vakken = new List<string>() { "Wiskunde", "Nederlands", "Engels", "Aardrijkskunde", "Lichamelijke Opvoeding" };
-            
+
             //// Maak een leerling aan
             //Leerling leerling = new Leerling("Jan", "Janssen", "Steenweg 1", "jan.janssen@test.be", "12345678923", new DateTime(1999, 12, 07), 1, "1A");
 
@@ -104,7 +104,7 @@ namespace ConsoleApplicatie
             //    Console.WriteLine($"klas: {l.KlasLokaal}");
             //    Console.WriteLine("----LEERLING-----");
             //}
-
+            
             Databeheer databeheer = new Databeheer("Data Source=DESKTOP-698J12G;Initial Catalog=schoolDatabank;Integrated Security=True");
             //databeheer.VoegStudentToe(leerling1);
             //databeheer.VerwijderStudent("12345678902");
@@ -141,9 +141,23 @@ namespace ConsoleApplicatie
 
 
             //--- UPDATEN VAN STUDENT DOOR RIJKSREGISTERNUMMER MEE TE GEVEN ALS SEARCH DAN DE UPDATED VERSIE VAN DE STUDENT ---
-            //Leerling UpdatedLeerling6 = new Leerling("trolly", "TrollyStraat 99f5", "Kerkhofstraat 8", "daan.verstraete@test.be", "67890123457", new DateTime(2004, 11, 9), 4, "C");
-            //databeheer.UpdateLeerling("67890123457", UpdatedLeerling6);
+            //Leerling UpdatedLeerling1 = new Leerling("Piet piraat", "ketneters", "ketnetStraat99", "daan.verstraete@test.be", "01234567891", new DateTime(2004, 11, 9), 4, "C");
+            //databeheer.UpdateLeerling("01234567891", UpdatedLeerling1);
             //--- UPDATEN VAN STUDENT DOOR RIJKSREGISTERNUMMER MEE TE GEVEN ALS SEARCH DAN DE UPDATED VERSIE VAN DE STUDENT ---
+
+
+            //--- OPVRAGEN VAN ALLE LEERLINGEN ---
+            //List<Leerling> leerlingen = databeheer.haalLeerlingen();
+            //foreach (Leerling l in leerlingen)
+            //{
+            //    Console.WriteLine(l);
+            //}
+            //--- OPVRAGEN VAN ALLE LEERLINGEN ---
+
+            //--- OPVRAGEN VAN 1 SPECIFIEK LEERLING DOOR DE RIJKSREGISTERNUMMER MEE TE GEVEN ---
+            //Console.WriteLine( databeheer.ZoekLeerlingOpRijksregisterNummer("23456789013"));
+            //--- OPVRAGEN VAN 1 SPECIFIEK LEERLING DOOR DE RIJKSREGISTERNUMMER MEE TE GEVEN ---
+
 
             Console.ReadLine();
         }
