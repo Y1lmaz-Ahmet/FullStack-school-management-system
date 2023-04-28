@@ -141,8 +141,8 @@ namespace ConsoleApplicatie
 
 
             //--- UPDATEN VAN STUDENT DOOR RIJKSREGISTERNUMMER MEE TE GEVEN ALS SEARCH DAN DE UPDATED VERSIE VAN DE STUDENT ---
-            Leerling UpdatedLeerling6 = new Leerling("trolly", "TrollyStraat 99f5", "Kerkhofstraat 8", "daan.verstraete@test.be", "67890123457", new DateTime(2004, 11, 9), 4, "C");
-            databeheer.UpdateLeerling("67890123457", UpdatedLeerling6);
+            //Leerling UpdatedLeerling6 = new Leerling("trolly", "TrollyStraat 99f5", "Kerkhofstraat 8", "daan.verstraete@test.be", "67890123457", new DateTime(2004, 11, 9), 4, "C");
+            //databeheer.UpdateLeerling("67890123457", UpdatedLeerling6);
             //--- UPDATEN VAN STUDENT DOOR RIJKSREGISTERNUMMER MEE TE GEVEN ALS SEARCH DAN DE UPDATED VERSIE VAN DE STUDENT ---
 
             Console.ReadLine();
