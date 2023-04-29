@@ -16,7 +16,7 @@ namespace ConsoleApplicatie
             //int consoleWidth = Console.WindowWidth;
             //string line = new string('*', consoleWidth);
             //Console.WriteLine(line);
-            //List<string> Vakken = new List<string>() { "Wiskunde", "Nederlands", "Engels", "Aardrijkskunde", "Lichamelijke Opvoeding" };
+            List<string> Vakken = new List<string>() { "Wiskunde", "Nederlands", "Engels", "Aardrijkskunde", "Lichamelijke Opvoeding" };
 
             //// Maak een leerling aan
             //Leerling leerling = new Leerling("Jan", "Janssen", "Steenweg 1", "jan.janssen@test.be", "12345678923", new DateTime(1999, 12, 07), 1, "1A");
@@ -30,7 +30,7 @@ namespace ConsoleApplicatie
             //Console.WriteLine($"Klaslokaal: {leerling.KlasLokaal}");
             //Console.WriteLine(line);
             //// Maak een leerkracht aan
-            //Leerkracht leerkracht = new Leerkracht("Piet", "Pieters", "Marktstraat 2", "piet.pieters@test.be", "02020200202", new DateTime(1978, 12, 06), Vakken, WerknemerType.Fulltime);
+            Leerkracht leerkracht = new Leerkracht("Piet", "Pieters", "Marktstraat 2", "piet.pieters@test.be", "02020200202", new DateTime(1978, 12, 06), Vakken, WerknemerType.Fulltime);
 
             //Console.WriteLine($"{leerkracht.Functie}: {leerkracht.Voornaam} {leerkracht.FamilieNaam}");
             //Console.WriteLine($"Adres: {leerkracht.Adres}");
@@ -158,6 +158,12 @@ namespace ConsoleApplicatie
             //Console.WriteLine( databeheer.ZoekLeerlingOpRijksregisterNummer("23456789013"));
             //--- OPVRAGEN VAN 1 SPECIFIEK LEERLING DOOR DE RIJKSREGISTERNUMMER MEE TE GEVEN ---
 
+            databeheer.VoegLeerkrachtToe(leerkracht);
+            //List<Leerkracht> leerkrachten = databeheer.HaalLeerkrachten();
+            //foreach(Leerkracht leerkrachte in leerkrachten)
+            //{
+            //    Console.WriteLine(leerkrachte);
+            //}
 
             Console.ReadLine();
         }

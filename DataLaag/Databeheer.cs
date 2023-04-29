@@ -1,4 +1,5 @@
-﻿using BusinessLaag.exceptions;
+﻿using BusinessLaag.Enums;
+using BusinessLaag.exceptions;
 using BusinessLaag.klassen;
 
 using System;
@@ -203,8 +204,83 @@ namespace DataLaag
             }
         }
 
-       
 
-        
+        public List<Leerkracht> HaalLeerkrachten()
+        {
+            SqlConnection connection = GetConnection();
+            List<Leerkracht> leerkrachten = new List<Leerkracht>();
+            string query = "SELECT * FROM dbo.LeerkrachtSql";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                connection.Open();
+                try
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
+                        string familieNaam = reader.GetString(reader.GetOrdinal("FamilieNaam"));
+                        string adres = reader.GetString(reader.GetOrdinal("Adres"));
+                        string email = reader.GetString(reader.GetOrdinal("Email"));
+                        string rijksregisterNummer = reader.GetString(reader.GetOrdinal("RijksregisterNummer"));
+                        DateTime geboorteDatum = reader.GetDateTime(reader.GetOrdinal("GeboorteDatum"));
+                        string werknemerTypeString = reader.GetString(reader.GetOrdinal("WerknemerType"));
+                        WerknemerType werknemerType = (WerknemerType)Enum.Parse(typeof(WerknemerType), werknemerTypeString);
+                        // Haal de vakken op en voeg ze toe aan een List<string>
+                        List<string> vakken = new List<string>();
+                        string vakkenString = reader.GetString(reader.GetOrdinal("Vakken"));
+                        if (!string.IsNullOrEmpty(vakkenString))
+                        {
+                            vakken = vakkenString.Split(',').ToList();
+                        }
+
+                        leerkrachten.Add(new Leerkracht(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum, vakken, werknemerType));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Er is een fout opgetreden bij het ophalen van de leerkrachten.", ex);
+                }
+            }
+
+            return leerkrachten;
+        }
+
+        public void VoegLeerkrachtToe(Leerkracht leerkracht)
+        {
+            SqlConnection connection = GetConnection();
+            string query = "insert into dbo.LeerkrachtSQL (Voornaam, FamilieNaam, Adres, Email, RijksregisterNummer, GeboorteDatum, Functie, Vakken, WerknemerType)" +
+                "VALUES (@Voornaam, @FamilieNaam, @Adres, @Email, @RijksregisterNummer, @GeboorteDatum, @Functie, @Vakken, @WerknemerType) ";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Voornaam", leerkracht.Voornaam);
+                command.Parameters.AddWithValue("@FamilieNaam", leerkracht.FamilieNaam);
+                command.Parameters.AddWithValue("@Adres", leerkracht.Adres);
+                command.Parameters.AddWithValue("@Email", leerkracht.Email);
+                command.Parameters.AddWithValue("@RijksregisterNummer", leerkracht.RijksregisterNummer);
+                command.Parameters.AddWithValue("@GeboorteDatum", leerkracht.GeboorteDatum);
+                command.Parameters.AddWithValue("@Functie", leerkracht.Functie);
+                string vakken = string.Join(";",leerkracht.Vakken);
+                command.Parameters.AddWithValue("@Vakken", vakken);
+                command.Parameters.AddWithValue("@WerknemerType", leerkracht.WerknemerType);
+
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                    Console.WriteLine("[VoegLeerkrachtToe]: student is toegevoegd in de databank.");
+
+                }
+            }
+
+        }
     }
 }
