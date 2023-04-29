@@ -25,7 +25,7 @@ namespace DataLaag
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
-        
+        //--- METHODES VOOR LEERLING --- 
         public List<Leerling> haalLeerlingen()
         {
             SqlConnection connection = GetConnection();
@@ -204,48 +204,50 @@ namespace DataLaag
             }
         }
 
+        //--- METHODES VOOR LEERLING --- 
 
-        public List<Leerkracht> HaalLeerkrachten()
+
+        public void HaalLeerkrachtenOp()
         {
-            SqlConnection connection = GetConnection();
-            List<Leerkracht> leerkrachten = new List<Leerkracht>();
-            string query = "SELECT * FROM dbo.LeerkrachtSql";
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using (SqlConnection connection = GetConnection())
             {
-                connection.Open();
-                try
+                string query = "SELECT * FROM dbo.LeerkrachtSql";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        string voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
-                        string familieNaam = reader.GetString(reader.GetOrdinal("FamilieNaam"));
-                        string adres = reader.GetString(reader.GetOrdinal("Adres"));
-                        string email = reader.GetString(reader.GetOrdinal("Email"));
-                        string rijksregisterNummer = reader.GetString(reader.GetOrdinal("RijksregisterNummer"));
-                        DateTime geboorteDatum = reader.GetDateTime(reader.GetOrdinal("GeboorteDatum"));
-                        string werknemerTypeString = reader.GetString(reader.GetOrdinal("WerknemerType"));
-                        WerknemerType werknemerType = (WerknemerType)Enum.Parse(typeof(WerknemerType), werknemerTypeString);
-                        // Haal de vakken op en voeg ze toe aan een List<string>
-                        List<string> vakken = new List<string>();
-                        string vakkenString = reader.GetString(reader.GetOrdinal("Vakken"));
-                        if (!string.IsNullOrEmpty(vakkenString))
+                        while (reader.Read())
                         {
-                            vakken = vakkenString.Split(',').ToList();
-                        }
+                            string voornaam = reader.GetString(reader.GetOrdinal("Voornaam"));
+                            string familieNaam = reader.GetString(reader.GetOrdinal("FamilieNaam"));
+                            string adres = reader.GetString(reader.GetOrdinal("Adres"));
+                            string email = reader.GetString(reader.GetOrdinal("Email"));
+                            string rijksregisterNummer = reader.GetString(reader.GetOrdinal("RijksregisterNummer"));
+                            DateTime geboorteDatum = reader.GetDateTime(reader.GetOrdinal("GeboorteDatum"));
 
-                        leerkrachten.Add(new Leerkracht(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum, vakken, werknemerType));
+                            // Parse Vakken list
+                            List<string> vakken = new List<string>();
+                            if (!reader.IsDBNull(reader.GetOrdinal("Vakken")))
+                            {
+                                string vakkenString = reader.GetString(reader.GetOrdinal("Vakken"));
+                                vakken = vakkenString.Split(',').ToList();
+                            }
+
+                            // Parse WerknemerType
+                            string werknemerTypeString = reader.GetString(reader.GetOrdinal("WerknemerType"));
+                            WerknemerType werknemerType = (WerknemerType)Enum.Parse(typeof(WerknemerType), werknemerTypeString);
+
+                            // Create and print Leerkracht object
+                            Leerkracht leerkracht = new Leerkracht(voornaam, familieNaam, adres, email, rijksregisterNummer, geboorteDatum, vakken, werknemerType);
+                            Console.WriteLine(leerkracht);
+                        }
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("Er is een fout opgetreden bij het ophalen van de leerkrachten.", ex);
-                }
             }
-
-            return leerkrachten;
         }
 
+        //--- METHODES VOOR LEERKRACHT ---
         public void VoegLeerkrachtToe(Leerkracht leerkracht)
         {
             SqlConnection connection = GetConnection();
@@ -282,5 +284,58 @@ namespace DataLaag
             }
 
         }
+
+
+        public void VerwijderLeerkracht(string rijksregisterNummer)
+        {
+            using(SqlConnection connection = GetConnection())
+            {
+                 string query = "delete from dbo.LeerkrachtSQl where RijksregisterNummer=@RijksregisterNummer";
+                 using(SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@RijksregisterNummer", rijksregisterNummer);
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+                        throw ex;
+                    }
+                    finally
+                    {
+                        connection.Close();  
+                        Console.WriteLine("[VerwijderLeerkracht]: Leerkracht is verwijdert, controleer databank.");
+
+                    }
+                }
+            }
+        }
+
+        public bool UpdateLeerkracht(string rijksregisterNummer,Leerkracht leerkracht)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                string query = "UPDATE dbo.LeerkrachtSql SET Voornaam = @Voornaam, Familienaam = @Familienaam, Adres = @Adres, Email = @Email," +
+                    " Rijksregisternummer = @Rijksregisternummer, Geboortedatum = @Geboortedatum, Vakken = @Vakken, WerknemerType = @WerknemerType WHERE Rijksregisternummer = @Rijksregisternummer";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Voornaam", leerkracht.Voornaam);
+                command.Parameters.AddWithValue("@Familienaam", leerkracht.FamilieNaam);
+                command.Parameters.AddWithValue("@Adres", leerkracht.Adres);
+                command.Parameters.AddWithValue("@Email", leerkracht.Email);
+                command.Parameters.AddWithValue("@Rijksregisternummer", leerkracht.RijksregisterNummer);
+                command.Parameters.AddWithValue("@Geboortedatum", leerkracht.GeboorteDatum);
+                command.Parameters.AddWithValue("@Vakken", string.Join(",", leerkracht.Vakken));
+                command.Parameters.AddWithValue("@WerknemerType", leerkracht.WerknemerType.ToString());
+
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+
+        //--- METHODES VOOR LEERKRACHT ---
+
     }
 }

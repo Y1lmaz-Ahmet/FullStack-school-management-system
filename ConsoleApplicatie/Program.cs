@@ -31,6 +31,7 @@ namespace ConsoleApplicatie
             //Console.WriteLine(line);
             //// Maak een leerkracht aan
             Leerkracht leerkracht = new Leerkracht("Piet", "Pieters", "Marktstraat 2", "piet.pieters@test.be", "02020200202", new DateTime(1978, 12, 06), Vakken, WerknemerType.Fulltime);
+            Leerkracht leerkrachtUpdated = new Leerkracht("Ahmet", "Yilmaz", "Marktstraat 2", "piet.pieters@test.be", "02020200202", new DateTime(1978, 12, 06), Vakken, WerknemerType.Fulltime);
 
             //Console.WriteLine($"{leerkracht.Functie}: {leerkracht.Voornaam} {leerkracht.FamilieNaam}");
             //Console.WriteLine($"Adres: {leerkracht.Adres}");
@@ -104,7 +105,7 @@ namespace ConsoleApplicatie
             //    Console.WriteLine($"klas: {l.KlasLokaal}");
             //    Console.WriteLine("----LEERLING-----");
             //}
-            
+
             Databeheer databeheer = new Databeheer("Data Source=DESKTOP-698J12G;Initial Catalog=schoolDatabank;Integrated Security=True");
             //databeheer.VoegStudentToe(leerling1);
             //databeheer.VerwijderStudent("12345678902");
@@ -159,12 +160,9 @@ namespace ConsoleApplicatie
             //--- OPVRAGEN VAN 1 SPECIFIEK LEERLING DOOR DE RIJKSREGISTERNUMMER MEE TE GEVEN ---
 
             databeheer.VoegLeerkrachtToe(leerkracht);
-            //List<Leerkracht> leerkrachten = databeheer.HaalLeerkrachten();
-            //foreach(Leerkracht leerkrachte in leerkrachten)
-            //{
-            //    Console.WriteLine(leerkrachte);
-            //}
-
+            //databeheer.HaalLeerkrachtenOp();
+            //databeheer.VerwijderLeerkracht("02020200202");
+            databeheer.UpdateLeerkracht("02020200202", leerkrachtUpdated);
             Console.ReadLine();
         }
     }

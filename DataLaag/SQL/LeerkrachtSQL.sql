@@ -7,6 +7,6 @@
     GeboorteDatum DATE NOT NULL,
     Functie NVARCHAR(255) NOT NULL,
     Vakken NVARCHAR(MAX) NOT NULL,
-    WerknemerType INT NOT NULL,
+    WerknemerType NVARCHAR(255) NOT NULL,
     CONSTRAINT PK_Leerkracht PRIMARY KEY (RijksregisterNummer)
 );
