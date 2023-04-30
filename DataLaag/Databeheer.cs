@@ -296,6 +296,9 @@ namespace DataLaag
                     command.Parameters.AddWithValue("@RijksregisterNummer", rijksregisterNummer);
                     try
                     {
+
+
+
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
